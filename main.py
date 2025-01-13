@@ -14,6 +14,13 @@ def main():
         # number of teams at the tournament
         num_teams = int(input("Enter the number of teams: "))
 
+        # create another dataframe containing the Team numbers of each game
+        teams = data.select_dtypes(include=np.number)
+
+        score = pd.DataFrame()
+        score[["Left 1", "Right 1"]] = data["Score Court 1"].str.split("-", expand=True)
+        score[["Left 2", "Right 2"]] = data["Score Court 2"].str.split("-", expand=True)
+        print(score)
     except FileNotFoundError:
         print("Error: The file was not found. Please check the path and try again.")
     except pd.errors.EmptyDataError:
