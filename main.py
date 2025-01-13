@@ -21,6 +21,25 @@ def main():
         score[["Left 1", "Right 1"]] = data["Score Court 1"].str.split("-", expand=True)
         score[["Left 2", "Right 2"]] = data["Score Court 2"].str.split("-", expand=True)
         print(score)
+
+        # of round robin games played total
+        num_games = len(data)
+
+        # of teams on one team
+        num_ind_on_team = (len(teams.columns)) / 4 
+
+        ## creating a results dataframe
+        # | team # | Games Won | Games Lost | Points for | Points against | Point Differential |
+        results_data = {
+            "Team" : range(1, num_teams + 1),
+            "Games Won" : [0] * num_teams,
+            "Games Lost" : [0] * num_teams,
+            "Points For" : [0] * num_teams,
+            "Points Against" : [0] * num_teams
+        }
+        result = pd.DataFrame(results_data)
+        print(result)
+        
     except FileNotFoundError:
         print("Error: The file was not found. Please check the path and try again.")
     except pd.errors.EmptyDataError:
